@@ -1,5 +1,5 @@
 //generate buttons
-var gifArray = ["haddaway", "dumb and dumber", "alien", "predator"];
+var gifArray = ["Haddaway", "Dumb and Dumber", "Aliens", "Predator"];
 
 function renderGifButtons() {
 
@@ -37,13 +37,39 @@ $(document).on("click", ".gifButton", function () {
             var gifAnimate = gif.images.fixed_height.url;
             var gifStill = gif.images.fixed_height_still.url;
 
-            var makeGif = $(`<img src="${gifStill}" data-still="${gifStill}" data-animate="${gifAnimate}" data-state="still"alt="${gifButtonGet}">`);
+            var makeGif = $(`<img class="gif" src="${gifStill}" data-still="${gifStill}" data-animate="${gifAnimate}" data-state="still" alt="${gifButtonGet}">`);
             $(".gif-cotainer").append(makeGif);
         }
-
-
-
     });
 
+});
 
+// On Click Gif Pause or Play
+
+$(document).on("click",".gif",function () {
+
+    var state = $(this).attr("data-state");
+
+    if (state === "still"){
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    }
+    
+    if (state === "animate"){
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+});
+
+//Enter Button 
+
+$(document).on("click", "#buttonSearch", function (event){
+
+    event.preventDefault();
+
+    var searchInput = $("#searchInput").val();
+    gifArray.push(searchInput);
+    console.log(gifArray);
+    renderGifButtons();
+    
 });
