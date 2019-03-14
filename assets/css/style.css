@@ -1,13 +1,18 @@
+body {
+    font-size: 20px;
+}
+
 .header-flex {
     display: flex;
     justify-content: flex-end;
-    background: cyan;
+    background: black;
     padding: 2vw;
 }
 
 h1 {
     margin-right: 5vw;
     font-size: 4vw;
+    color: white;
 }
 
 
@@ -26,7 +31,7 @@ h1 {
     padding: 10px;
     margin: 10px;
     transition: all .25s;
-    box-sizing: border-box;
+    box-sizing: content-box;
 
 }
 
@@ -38,14 +43,22 @@ h1 {
 
 .body-flex {
     display: flex;
-}
-.gif-container {
-    flex:3;
+    margin-top: 3vh;
 }
 
-.gif{
-    margin: 10px;
-    border: 3px solid yellow;
+.gif-container-flex {
+    width: 100%;
+    flex:2;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: wrap;
+    padding: 0 4px;
+}
+
+.gif {
+    /* flex-grow: 1; */
+    margin: 8px;
+    vertical-align: middle;
 }
 
 .form {

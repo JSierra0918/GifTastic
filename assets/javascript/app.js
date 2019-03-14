@@ -38,7 +38,7 @@ $(document).on("click", ".gifButton", function () {
             var gifStill = gif.images.fixed_height_still.url;
 
             var makeGif = $(`<img class="gif" src="${gifStill}" data-still="${gifStill}" data-animate="${gifAnimate}" data-state="still" alt="${gifButtonGet}">`);
-            $(".gif-cotainer").append(makeGif);
+            $(".gif-container-flex").append(makeGif);
         }
     });
 
