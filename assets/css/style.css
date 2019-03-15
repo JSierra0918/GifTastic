@@ -1,11 +1,13 @@
 body {
     font-size: 20px;
+   background-color: #F2F2F7;
 }
 
 .header-flex {
     display: flex;
     justify-content: flex-end;
-    background: black;
+    /* background: black; */
+    background: #002642;
     padding: 2vw;
 }
 
@@ -18,27 +20,33 @@ h1 {
 
 .button-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-flow: wrap;
+    /* background-color: #353535;
+     */
+     background-color: #02040F;
+    z-index: -5;
 }
 
 .gifButton {
-    text-align: center;
-    width: 8vw;
+    color: #fff;
+    flex-basis: 8vw;
     border-radius: 3px;
-    height: auto;
-    background: rgb(87, 87, 226);
-    padding: 10px;
-    margin: 10px;
-    transition: all .25s;
-    box-sizing: content-box;
-
+    padding: 7px 15px;
+    transition: all 1s;
+    overflow: hidden;
+    letter-spacing: .08em;
+    border: 2px solid #E59500;
+    margin: 30px;
+    position: relative;
+    background-color: transparent;
 }
 
 .gifButton:hover {
     cursor: pointer;
-    background-color: rgb(114, 91, 241);
-    border: 3px solid rgb(47, 31, 139);
+    flex-basis: 10vw;
+    opacity: 1;
+    background: #E59500;
 }
 
 .body-flex {
@@ -47,20 +55,81 @@ h1 {
 }
 
 .gif-container-flex {
-    width: 100%;
+    flex-basis: 100%;
     flex:2;
     display: flex;
-    justify-content: flex-start;
     flex-flow: wrap;
-    padding: 0 4px;
+    justify-content: space-between;
+}
+
+.gif-styler {
+    flex-basis: 30%;
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    flex-flow: row wrap;
+    overflow: hidden;
+}
+
+.gif-text {
+    flex: 2;
+    flex-flow: nowrap;
 }
 
 .gif {
-    /* flex-grow: 1; */
-    margin: 8px;
-    vertical-align: middle;
+    flex: 1;
+}
+
+img.gif  {
+    width: 100%;
+    max-width: 200px;
+}
+
+.sidebar {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .form {
-    justify-content: flex-end;
+    border:.5vw solid #28454A;
+    padding: 20px;
+    border-radius: 1.1vw;
+    
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #28454A;
+    color: white;
+}
+
+input[type=text]{
+  
+}
+
+
+input[type=submit]{
+    background: #E59500;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: width 0.4s ease-in-out;
+    width: 100%;
+}
+
+input[type=submit]:hover {
+    background: #E59500;
 }

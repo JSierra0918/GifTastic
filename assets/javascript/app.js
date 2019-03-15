@@ -19,26 +19,47 @@ renderGifButtons();
 
 $(document).on("click", ".gifButton", function () {
 
-    var gifButtonGet = $(this).attr("data-name");
+    var getGIF = $(this).attr("data-name");
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifButtonGet + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5"
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5"
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
 
-        console.log(queryURL);
-        console.log(response.data[0].images.fixed_height.url);
+        console.log(response);
 
         for (var i = 0; i < response.data.length; i++) {
             console.log("data");
+            //Retrieve data
             var gif = response.data[i];
             var gifAnimate = gif.images.fixed_height.url;
             var gifStill = gif.images.fixed_height_still.url;
+            var gifInfoRating = gif.rating; 
+            var gifInfoTitle = gif.title;
 
-            var makeGif = $(`<img class="gif" src="${gifStill}" data-still="${gifStill}" data-animate="${gifAnimate}" data-state="still" alt="${gifButtonGet}">`);
-            $(".gif-container-flex").append(makeGif);
+            //initialize variables
+            var gifStyler = $(`<div class="gif-styler"></div>`);
+            var gifText =  $(`<div class="gif-text"></div>`)
+            var gifInfoTitleElement = $(`<p id="title">${gifInfoTitle}</p>`); 
+            var gifInfoRatingElement = $(`<p id="rating">Rating: ${gifInfoRating}</p>`); 
+            var downloadGif = $(`<a href="${gifAnimate}" class="download-gif" download><img src="#" id="download"> Gif Download</a>`)
+            //make gif
+            var makeGif = $(`<img class="gif" src="${gifStill}" data-still="${gifStill}" data-animate="${gifAnimate}" data-state="still" alt="${getGIF}">`);
+
+            //concatenate text
+            gifText.append(gifInfoTitleElement);
+            gifText.append(gifInfoRatingElement);
+            gifText.append(downloadGif);
+
+            //append two main elements to gif styler
+            gifStyler.append(gifText);
+            gifStyler.append(makeGif);
+           
+
+            $(".gif-container-flex").prepend(gifStyler);
+
         }
     });
 

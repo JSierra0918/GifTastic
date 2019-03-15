@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,25 +11,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
+
 <body>
     <div class="header-flex">
         <h1>GifTastic</h1>
     </div>
-        <div class="button-container"></div>
-    
-    <div class="body-flex">
-        <div class="gif-container-flex" >
-        
-        </div>
-    
-    <form class="form">
-        <label for="searchInput"> Search Gif:  </label>
-        <input type="text" class="search" id="searchInput" value="" placeholder="Search any gif you want!" pattern="\S+"/>
-        <input type="submit" class="button-search" id="buttonSearch" value="submit">
-    </form>
-</div>
+    <div class="button-container"></div>
 
-    
+    <div class="body-flex">
+        <div class="gif-container-flex">
+        </div>
+
+        <div class="sidebar">
+            <form class="form">
+                <label for="buttonSearch" id="searchLabel">Add a GIF!</label>
+                <input type="text" class="search" id="searchInput" value="" pattern="\S+" />
+                <input type="submit" class="button-search" id="buttonSearch" value="submit">
+            </form>
+        </div>
+    </div>
+
+
     <script src="./assets/javascript/app.js"></script>
 </body>
+
 </html>
