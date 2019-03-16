@@ -56,26 +56,26 @@ h1 {
 
 .gif-container-flex {
     flex-basis: 100%;
-    flex:2;
+    flex:3;
     display: flex;
     flex-flow: wrap;
     justify-content: space-between;
 }
 
 .gif-styler {
-    flex-basis: 30%;
+    flex-basis: 49%;
     background: white;
     border-radius: 6px;
     display: flex;
     padding: 20px;
     box-sizing: border-box;
     margin-bottom: 10px;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     overflow: hidden;
 }
 
 .gif-text {
-    flex: 2;
+    flex: 1;
     flex-flow: nowrap;
 }
 
@@ -83,9 +83,23 @@ h1 {
     flex: 1;
 }
 
+p#title {
+    font-size: 2vw;
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
+#rating {
+    margin-top: 3vh;
+}
+a.download-gif {
+    margin-top: 2vh;
+}
+
 img.gif  {
     width: 100%;
-    max-width: 200px;
+    max-width: 218px;
+    flex: 1;
 }
 
 .sidebar {
