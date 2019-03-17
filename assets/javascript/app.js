@@ -13,6 +13,14 @@ function renderGifButtons() {
 
 }
 
+function favoriteGIf(gif) {
+    var favoriteArray = [];
+
+    var favGif = $(`<div  class="favorite-gif">${gif.attr("data-name")}`);
+
+    $("#favoriteList");
+}
+
 renderGifButtons();
 
 //AJAX Generate Buttons
@@ -21,7 +29,9 @@ $(document).on("click", ".gifButton", function () {
 
     var getGIF = $(this).attr("data-name");
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5"
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
+    
+    var queryDownload = "http://api.giphy.com/v1/gifs/search?q=" + "download" + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
 
     $.ajax({
         url: queryURL,
@@ -36,15 +46,15 @@ $(document).on("click", ".gifButton", function () {
             var gif = response.data[i];
             var gifAnimate = gif.images.fixed_height.url;
             var gifStill = gif.images.fixed_height_still.url;
-            var gifInfoRating = gif.rating; 
+            var gifInfoRating = gif.rating;
             var gifInfoTitle = gif.title;
 
             //initialize variables
             var gifStyler = $(`<div class="gif-styler"></div>`);
-            var gifText =  $(`<div class="gif-text"></div>`)
-            var gifInfoTitleElement = $(`<p id="title">${gifInfoTitle}</p>`); 
-            var gifInfoRatingElement = $(`<p id="rating">Rating: ${gifInfoRating}</p>`); 
-            var downloadGif = $(`<a href="${gifAnimate}" class="download-gif" download><img src="#" id="download"> Gif Download</a>`)
+            var gifText = $(`<div class="gif-text"></div>`)
+            var gifInfoTitleElement = $(`<p id="title">${gifInfoTitle}</p>`);
+            var gifInfoRatingElement = $(`<p id="rating">Rating: ${gifInfoRating}</p>`);
+            var downloadGif = $(`<a href="${gifAnimate}" class="download-gif" download><img src="./assets/images/down-arrow.svg" id="download"> Gif Download</a>`)
             //make gif
             var makeGif = $(`<img class="gif" src="${gifStill}" data-still="${gifStill}" data-animate="${gifAnimate}" data-state="still" alt="${getGIF}">`);
 
@@ -56,7 +66,7 @@ $(document).on("click", ".gifButton", function () {
             //append two main elements to gif styler
             gifStyler.append(gifText);
             gifStyler.append(makeGif);
-           
+
 
             $(".gif-container-flex").prepend(gifStyler);
 
@@ -67,16 +77,16 @@ $(document).on("click", ".gifButton", function () {
 
 // On Click Gif Pause or Play
 
-$(document).on("click",".gif",function () {
+$(document).on("click", ".gif", function () {
 
     var state = $(this).attr("data-state");
 
-    if (state === "still"){
+    if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
     }
-    
-    if (state === "animate"){
+
+    if (state === "animate") {
         $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
     }
@@ -84,7 +94,7 @@ $(document).on("click",".gif",function () {
 
 //Enter Button 
 
-$(document).on("click", "#buttonSearch", function (event){
+$(document).on("click", "#buttonSearch", function (event) {
 
     event.preventDefault();
 
@@ -92,5 +102,11 @@ $(document).on("click", "#buttonSearch", function (event){
     gifArray.push(searchInput);
     console.log(gifArray);
     renderGifButtons();
-    
+
+});
+
+//Favotite Gif 
+
+$(document).on("click", "#fav-icon", function () {
+
 });
