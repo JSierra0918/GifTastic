@@ -1,5 +1,8 @@
 //generate buttons
 var gifArray = ["Haddaway", "Dumb and Dumber", "Aliens", "Predator"];
+var isWelcome = true;
+var favoriteArray = [];
+
 
 function renderGifButtons() {
 
@@ -14,14 +17,11 @@ function renderGifButtons() {
 }
 
 function favoriteGIf(gif) {
-    var favoriteArray = [];
 
     var favGif = $(`<div  class="favorite-gif">${gif.attr("data-name")}`);
 
     $("#favoriteList");
 }
-
-renderGifButtons();
 
 //AJAX Generate Buttons
 
@@ -30,8 +30,8 @@ $(document).on("click", ".gifButton", function () {
     var getGIF = $(this).attr("data-name");
 
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
-    
-    var queryDownload = "http://api.giphy.com/v1/gifs/search?q=" + "download" + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
+
+    var queryParty = "http://api.giphy.com/v1/gifs/search?q=" + "download" + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
 
     $.ajax({
         url: queryURL,
@@ -54,7 +54,8 @@ $(document).on("click", ".gifButton", function () {
             var gifText = $(`<div class="gif-text"></div>`)
             var gifInfoTitleElement = $(`<p id="title">${gifInfoTitle}</p>`);
             var gifInfoRatingElement = $(`<p id="rating">Rating: ${gifInfoRating}</p>`);
-            var downloadGif = $(`<a href="${gifAnimate}" class="download-gif" download><img src="./assets/images/down-arrow.svg" id="download"> Gif Download</a>`)
+            var downloadGif = $(`<a href="${gifAnimate}" class="download-gif" download><img src="./assets/images/down-arrow.svg" id="download" class="bounce"> Gif Download</a>`)
+
             //make gif
             var makeGif = $(`<img class="gif" src="${gifStill}" data-still="${gifStill}" data-animate="${gifAnimate}" data-state="still" alt="${getGIF}">`);
 
@@ -67,7 +68,7 @@ $(document).on("click", ".gifButton", function () {
             gifStyler.append(gifText);
             gifStyler.append(makeGif);
 
-
+            welcomeScreen();
             $(".gif-container-flex").prepend(gifStyler);
 
         }
@@ -110,3 +111,43 @@ $(document).on("click", "#buttonSearch", function (event) {
 $(document).on("click", "#fav-icon", function () {
 
 });
+
+
+//Gif welcome screen 
+
+function welcomeScreen() {
+
+    var getWelcomeGif = "welcome";
+    var queryWelcomeURL = "http://api.giphy.com/v1/gifs/search?q=" + getWelcomeGif + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
+
+    $.ajax({
+        url: queryWelcomeURL,
+        method: "GET"
+    }).then(function (response) {
+
+        // console.log(response);
+        var randomWelcome = Math.floor(Math.random * 5);
+        var gifWelcome = response.data[randomWelcome].images.fixed_height.url;
+
+        $(".gif-container-flex").empty();
+
+        if (isWelcome) {
+
+            var welcome = $(`<div class="place-holder">5
+            <h6>Click one of the buttons to query the topic or create a query yourself!</h6>
+            <img src=${gifWelcome} alt=""></div>`);
+
+            $(".gif-container-flex").append(welcome);
+
+        } else {
+            console.log("its false!")
+            isWelcome = false;
+            $(".gif-container-flex").empty();
+        }
+
+    });
+}
+
+//execute functions
+renderGifButtons();
+welcomeScreen();
