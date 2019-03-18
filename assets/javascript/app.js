@@ -3,15 +3,52 @@ var gifArray = ["Haddaway", "Dumb and Dumber", "Aliens", "Predator"];
 var isWelcome = true;
 var favoriteArray = [];
 
+//Gif welcome screen 
+
+function welcomeScreen(isWelc) {
+
+    var getWelcomeGif = "welcome";
+    var queryLimit = 5;
+    var queryWelcomeURL = "http://api.giphy.com/v1/gifs/search?q=" + getWelcomeGif + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=" + queryLimit;
+
+
+    $.ajax({
+        url: queryWelcomeURL,
+        method: "GET"
+    }).then(function (response) {
+
+        var randomWelcome = Math.floor(Math.random() * queryLimit);
+        var gifWelcome = response.data[randomWelcome].images.fixed_height.url;
+
+        if (isWelc) {
+            var welcome = $(`<div class="place-holder">
+        <h6>Click one of the buttons to query the topic or create a query yourself!</h6>
+        <img src=${gifWelcome} alt=""></div>`);
+
+            $(".gif-container-flex").append(welcome);
+        }
+
+        if ($(".gif-container-flex").find(".place-holder").length !== 0) {
+
+            if (!isWelc) {
+
+                $(".gif-container-flex").empty();
+
+            }
+        }
+
+    });
+}
+
 
 function renderGifButtons() {
-
 
     $(".button-container").empty();
 
     gifArray.forEach(function (item, index, gifArray) {
-        var gifButton = $(`<div class="gifButton" data-name="${item}" >${item}</div>`);
+        var gifButton = $(`<div class="gifButton" data-name="${item}" >${item}<span class="x">X</span></div>`);
         $(".button-container").append(gifButton);
+
     });
 
 }
@@ -27,6 +64,10 @@ function favoriteGIf(gif) {
 
 $(document).on("click", ".gifButton", function () {
 
+    //Make Welcome screen disappear
+    isWelcome = false;
+    welcomeScreen(isWelcome);
+
     var getGIF = $(this).attr("data-name");
 
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
@@ -41,7 +82,7 @@ $(document).on("click", ".gifButton", function () {
         console.log(response);
 
         for (var i = 0; i < response.data.length; i++) {
-            console.log("data");
+
             //Retrieve data
             var gif = response.data[i];
             var gifAnimate = gif.images.fixed_height.url;
@@ -54,7 +95,7 @@ $(document).on("click", ".gifButton", function () {
             var gifText = $(`<div class="gif-text"></div>`)
             var gifInfoTitleElement = $(`<p id="title">${gifInfoTitle}</p>`);
             var gifInfoRatingElement = $(`<p id="rating">Rating: ${gifInfoRating}</p>`);
-            var downloadGif = $(`<a href="${gifAnimate}" class="download-gif" download><img src="./assets/images/down-arrow.svg" id="download" class="bounce"> Gif Download</a>`)
+            var downloadGif = $(`<a href="${gifAnimate}" class="download-gif" download><img src="./assets/images/down-arrow.svg" id="download" class="bounce"> Gif Download</a>`);
 
             //make gif
             var makeGif = $(`<img class="gif" src="${gifStill}" data-still="${gifStill}" data-animate="${gifAnimate}" data-state="still" alt="${getGIF}">`);
@@ -68,7 +109,7 @@ $(document).on("click", ".gifButton", function () {
             gifStyler.append(gifText);
             gifStyler.append(makeGif);
 
-            welcomeScreen();
+            //populate gifs
             $(".gif-container-flex").prepend(gifStyler);
 
         }
@@ -101,9 +142,23 @@ $(document).on("click", "#buttonSearch", function (event) {
 
     var searchInput = $("#searchInput").val();
     gifArray.push(searchInput);
-    console.log(gifArray);
     renderGifButtons();
 
+});
+
+// Click the X
+$(document).on("click", ".x", function () {
+
+    $(this).parent().remove();
+
+    var index = gifArray.indexOf($(this).parent().attr("data-name"));
+    console.log("Click X - index = " + index);
+
+    if (index > -1) {
+        gifArray.splice(index, 1);
+    }
+
+    renderGifButtons();
 });
 
 //Favotite Gif 
@@ -112,42 +167,6 @@ $(document).on("click", "#fav-icon", function () {
 
 });
 
-
-//Gif welcome screen 
-
-function welcomeScreen() {
-
-    var getWelcomeGif = "welcome";
-    var queryWelcomeURL = "http://api.giphy.com/v1/gifs/search?q=" + getWelcomeGif + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
-
-    $.ajax({
-        url: queryWelcomeURL,
-        method: "GET"
-    }).then(function (response) {
-
-        // console.log(response);
-        var randomWelcome = Math.floor(Math.random * 5);
-        var gifWelcome = response.data[randomWelcome].images.fixed_height.url;
-
-        $(".gif-container-flex").empty();
-
-        if (isWelcome) {
-
-            var welcome = $(`<div class="place-holder">5
-            <h6>Click one of the buttons to query the topic or create a query yourself!</h6>
-            <img src=${gifWelcome} alt=""></div>`);
-
-            $(".gif-container-flex").append(welcome);
-
-        } else {
-            console.log("its false!")
-            isWelcome = false;
-            $(".gif-container-flex").empty();
-        }
-
-    });
-}
-
 //execute functions
 renderGifButtons();
-welcomeScreen();
+welcomeScreen(isWelcome);
