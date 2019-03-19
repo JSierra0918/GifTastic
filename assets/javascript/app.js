@@ -9,8 +9,8 @@ var queryLimit = 5;
 function welcomeScreen(isWelc) {
 
     var getWelcomeGif = "welcome";
-    var queryLimit = 5;
-    var queryWelcomeURL = "http://api.giphy.com/v1/gifs/search?q=" + getWelcomeGif + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=" + queryLimit;
+
+    var queryWelcomeURL = "https://api.giphy.com/v1/gifs/search?q=" + getWelcomeGif + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=" + queryLimit;
 
 
     $.ajax({
@@ -72,9 +72,7 @@ $(document).on("click", ".gifButton", function () {
     var getGIF = $(this).attr("data-name");
  
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=" + queryLimit;
-
-    var queryParty = "http://api.giphy.com/v1/gifs/search?q=" + "download" + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=" + queryLimit;
 
     $.ajax({
         url: queryURL,
