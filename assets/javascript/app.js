@@ -2,6 +2,7 @@
 var gifArray = ["Haddaway", "Dumb and Dumber", "Aliens", "Predator"];
 var isWelcome = true;
 var favoriteArray = [];
+var queryLimit = 5;
 
 //Gif welcome screen 
 
@@ -69,8 +70,9 @@ $(document).on("click", ".gifButton", function () {
     welcomeScreen(isWelcome);
 
     var getGIF = $(this).attr("data-name");
+ 
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=" + queryLimit;
 
     var queryParty = "http://api.giphy.com/v1/gifs/search?q=" + "download" + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=5";
 
@@ -141,6 +143,8 @@ $(document).on("click", "#buttonSearch", function (event) {
     event.preventDefault();
 
     var searchInput = $("#searchInput").val();
+     queryLimit = $("#queryLimit").val();
+
     gifArray.push(searchInput);
     renderGifButtons();
 

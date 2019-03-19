@@ -162,7 +162,7 @@ img.gif  {
     border-radius: 1.1vw;
 }
 
-input[type=text] {
+input[type=text], input[type=number] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -176,6 +176,11 @@ input[type=text] {
 input[type=text]{
     font-weight: bold
   
+}
+
+input[type=number]::placeholder {
+    color: white;
+    font-weight: bolder;
 }
 
 
