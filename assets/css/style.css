@@ -60,7 +60,7 @@ span.x {
     background: #02040F;
     visibility: hidden;
     transition: all .5s ;
-    width: 30px;
+    font-size: 1.25vw;
     text-align: center;
 }
 
@@ -75,10 +75,12 @@ span.x {
     cursor: pointer;
     visibility: visible;
     z-index: 5;
+    padding: 2px;
 }
 
 span.x:hover {
     background-color: red;
+    padding: 2px;
 }
 
 .body-flex {
@@ -136,6 +138,7 @@ img.gif  {
     width: 100%;
     max-width: 218px;
     flex: 1;
+    object-fit: fill;
 }
 
 #download {
