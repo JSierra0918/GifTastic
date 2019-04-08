@@ -1,2 +1,2 @@
 # GifTastic
-Search gifs by clicking the button.  Add gifs choosing to add a gif search button.
+Search gifs and add gifs with a click of a button
