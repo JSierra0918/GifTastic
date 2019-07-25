@@ -269,4 +269,8 @@ input[type=submit]:hover {
     img.gif {
         max-width: 100%;
     }
+
+    .gifButton {
+        text-align: center;
+    }
 }
