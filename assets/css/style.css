@@ -256,6 +256,17 @@ input[type=submit]:hover {
     .place-holder img {
         align-self: center;
     }
+}
 
+@media screen and (max-width: 460px){ 
 
+    .gif-container-flex {
+        order: 2;
+        flex-flow: column;
+        text-align: center;
+    }
+
+    img.gif {
+        max-width: 100%;
+    }
 }
