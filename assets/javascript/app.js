@@ -56,7 +56,7 @@ function renderGifButtons() {
 
 function favoriteGIf(gif) {
 
-    var favGif = $(`<div  class="favorite-gif">${gif.attr("data-name")}`);
+    var favGif = $(`<div class="favorite-gif">${gif.attr("data-name")}`);
 
     $("#favoriteList");
 }
@@ -70,7 +70,6 @@ $(document).on("click", ".gifButton", function () {
     welcomeScreen(isWelcome);
 
     var getGIF = $(this).attr("data-name");
- 
 
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + getGIF + "&api_key=iLP3243AHYBYTmM7oSFCZdqHq09UxLyJ&limit=" + queryLimit;
 
