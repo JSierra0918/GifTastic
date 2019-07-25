@@ -78,7 +78,7 @@ $(document).on("click", ".gifButton", function () {
         method: "GET"
     }).then(function (response) {
 
-        console.log(response);
+        // console.log(response);
 
         for (var i = 0; i < response.data.length; i++) {
 
@@ -153,7 +153,6 @@ $(document).on("click", ".x", function () {
     $(this).parent().remove();
 
     var index = gifArray.indexOf($(this).parent().attr("data-name"));
-    console.log("Click X - index = " + index);
 
     if (index > -1) {
         gifArray.splice(index, 1);
